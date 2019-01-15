@@ -5,6 +5,7 @@
  */
 package app;
 
+import model.Direccion;
 import model.Profesor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -28,21 +29,23 @@ public class App {
         SessionFactory factory = new Configuration().configure().buildSessionFactory(); 
         
         // CREAMOS UN OBJETO
-        Profesor profesor=new Profesor(80,"Pepe","Garcia","Perez");
+        Direccion direccion=new Direccion(10, "Calle Reina",5, "Xàtiva", "Valencia" );
+        Profesor profesor=new Profesor(11,"Jesus","Garcia","Perez");
+        profesor.setDireccion(direccion);
         
         //CREAR UNA SESION
         Session session=factory.openSession();
         session.beginTransaction();
         
         //GUARDAR OBJETO
-        //session.save(profesor);
+        session.save(profesor);
         
         Profesor profesor2=(Profesor) session.get(Profesor.class, 1);
         System.out.println(profesor2);
         
         
-        profesor.setNombre("Manola");
-        session.update(profesor);
+        //profesor.setNombre("Manola");
+        //session.update(profesor);
         
         //session.saveOrUpdate(profesor);
         
